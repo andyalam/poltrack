@@ -1,4 +1,10 @@
-import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  OnDestroy,
+  ViewChild,
+  ElementRef
+} from '@angular/core';
 import { Subject } from 'rxjs';
 
 import {
@@ -10,13 +16,10 @@ import {
 } from '@angular/material/expansion';
 import { MatGridList, MatGridTile } from '@angular/material/grid-list';
 import { MatVerticalStepper, MatStep } from '@angular/material/stepper';
-import {
-  MatSelect,
-  MatOption,
-  MatListOption,
-  MatSelectionList,
-  MatTabChangeEvent
-} from '@angular/material';
+import { MatOption } from '@angular/material/core';
+import { MatListOption, MatSelectionList } from '@angular/material/list';
+import { MatSelect } from '@angular/material/select';
+import { MatTabChangeEvent } from '@angular/material/tabs';
 
 import { ReportCardsService } from '@app/report-cards/report-cards.service';
 import {
@@ -28,7 +31,10 @@ import {
   MIN_SEARCH_STRING_LENGTH,
   TOOLTIP_POSITION_BELOW
 } from '../constants';
-import { ActorSearchResult, ActorProviderScorecardSearchResult } from '../report-cards-config.model';
+import {
+  ActorSearchResult,
+  ActorProviderScorecardSearchResult
+} from '../report-cards-config.model';
 import { StepperSelectionEvent } from '@angular/cdk/stepper';
 
 @Component({
@@ -40,15 +46,15 @@ import { StepperSelectionEvent } from '@angular/cdk/stepper';
  * Report Card presentation component.
  */
 export class ReportCardsComponent implements OnDestroy {
-  @ViewChild('actorSearchResultList')
+  @ViewChild('actorSearchResultList', { static: false })
   actorSearchResultList: MatSelectionList;
 
-  @ViewChild('actionSearchInput')
+  @ViewChild('actionSearchInput', { static: false })
   actionSearchInput: ElementRef;
 
   private unsubscribe$: Subject<void> = new Subject<void>();
 
-  constructor(public reportCardsService: ReportCardsService) { }
+  constructor(public reportCardsService: ReportCardsService) {}
 
   maxActors = MAX_ACTORS;
   minActors = MIN_ACTORS;
@@ -122,17 +128,21 @@ export class ReportCardsComponent implements OnDestroy {
     actorConfigOfficeId: string
   ) {
     this.expandedActorIndex = actorIndex;
-    this.reportCardsService.actorToConfigure = { personId: actorConfigPersonId, officeId: actorConfigOfficeId };
+    this.reportCardsService.actorToConfigure = {
+      personId: actorConfigPersonId,
+      officeId: actorConfigOfficeId
+    };
   }
 
   onStepperSelectionChanged(event: StepperSelectionEvent) {
-
     // close any Actor expansion panel that might be opened.
     this.expandedActorIndex = NO_ACTOR_PANEL_EXPANDED_INDEX;
     this.reportCardsService.clearProviderScorecardSearchResults();
 
     // stepper selected Step 0 - Actor selection; clear any actor search results
-    this.reportCardsService.actorSearchResults$.next(new Array<ActorSearchResult>());
+    this.reportCardsService.actorSearchResults$.next(
+      new Array<ActorSearchResult>()
+    );
   }
 
   onStepTwoTabChange(ev: MatTabChangeEvent) {
