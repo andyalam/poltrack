@@ -7,10 +7,6 @@ import { ROUTE_ANIMATIONS_ELEMENTS } from '@app/core';
   templateUrl: './about.component.html',
   styleUrls: ['./about.component.scss']
 })
-export class AboutComponent implements OnInit {
+export class AboutComponent {
   routeAnimationsElements = ROUTE_ANIMATIONS_ELEMENTS;
-
-  constructor() {}
-
-  ngOnInit() {}
 }

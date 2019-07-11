@@ -8,11 +8,9 @@ import { ROUTE_ANIMATIONS_ELEMENTS } from '@app/core';
   templateUrl: './features.component.html',
   styleUrls: ['./features.component.scss']
 })
-export class FeaturesComponent implements OnInit {
+export class FeaturesComponent {
   routeAnimationsElements = ROUTE_ANIMATIONS_ELEMENTS;
   versions = env.versions;
-
-  ngOnInit() {}
 
   openLink(link: string) {
     window.open(link, '_blank');

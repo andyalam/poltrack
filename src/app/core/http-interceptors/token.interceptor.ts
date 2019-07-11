@@ -15,9 +15,9 @@ import AuthConfig from '@app/core/auth/auth.config';
 export class TokenInterceptor implements HttpInterceptor {
   constructor() {}
   intercept(
-    request: HttpRequest<any>,
+    request: HttpRequest<unknown>,
     next: HttpHandler
-  ): Observable<HttpEvent<any>> {
+  ): Observable<HttpEvent<unknown>> {
     const authResponse = hello(
       AuthConfig.HelloJsB2CSignInNetwork
     ).getAuthResponse();

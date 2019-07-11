@@ -15,11 +15,11 @@ export class HttpErrorInterceptor implements HttpInterceptor {
   constructor(private injector: Injector) {}
 
   intercept(
-    request: HttpRequest<any>,
+    request: HttpRequest<unknown>,
     next: HttpHandler
-  ): Observable<HttpEvent<any>> {
+  ): Observable<HttpEvent<unknown>> {
     return next.handle(request).pipe(
-      tap(null, (err: any) => {
+      tap(null, (err: unknown) => {
         if (err instanceof HttpErrorResponse) {
           const appErrorHandler = this.injector.get(ErrorHandler);
           appErrorHandler.handleError(err);
