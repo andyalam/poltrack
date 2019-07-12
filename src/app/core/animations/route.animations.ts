@@ -5,13 +5,15 @@ import {
   transition,
   trigger,
   stagger,
-  sequence
+  sequence,
+  AnimationTriggerMetadata,
+  AnimationMetadata
 } from '@angular/animations';
 import { AnimationsService } from './animations.service';
 
 export const ROUTE_ANIMATIONS_ELEMENTS = 'route-animations-elements';
 
-const STEPS_ALL: any[] = [
+const STEPS_ALL: AnimationMetadata[] = [
   query(':enter > *', style({ opacity: 0, position: 'fixed' }), {
     optional: true
   }),
@@ -63,25 +65,28 @@ const STEPS_NONE = [];
 const STEPS_PAGE = [STEPS_ALL[0], STEPS_ALL[2]];
 const STEPS_ELEMENTS = [STEPS_ALL[1], STEPS_ALL[3]];
 
-export const routeAnimations = trigger('routeAnimations', [
-  transition(isRouteAnimationsAll, STEPS_ALL),
-  transition(isRouteAnimationsNone, STEPS_NONE),
-  transition(isRouteAnimationsPage, STEPS_PAGE),
-  transition(isRouteAnimationsElements, STEPS_ELEMENTS)
-]);
+export const routeAnimations: AnimationTriggerMetadata = trigger(
+  'routeAnimations',
+  [
+    transition(isRouteAnimationsAll, STEPS_ALL),
+    transition(isRouteAnimationsNone, STEPS_NONE),
+    transition(isRouteAnimationsPage, STEPS_PAGE),
+    transition(isRouteAnimationsElements, STEPS_ELEMENTS)
+  ]
+);
 
-export function isRouteAnimationsAll() {
+export function isRouteAnimationsAll(): boolean {
   return AnimationsService.isRouteAnimationsType('ALL');
 }
 
-export function isRouteAnimationsNone() {
+export function isRouteAnimationsNone(): boolean {
   return AnimationsService.isRouteAnimationsType('NONE');
 }
 
-export function isRouteAnimationsPage() {
+export function isRouteAnimationsPage(): boolean {
   return AnimationsService.isRouteAnimationsType('PAGE');
 }
 
-export function isRouteAnimationsElements() {
+export function isRouteAnimationsElements(): boolean {
   return AnimationsService.isRouteAnimationsType('ELEMENTS');
 }
