@@ -29,11 +29,14 @@ import {
   SPINNER_DIAMETER,
   NO_ACTOR_PANEL_EXPANDED_INDEX,
   MIN_SEARCH_STRING_LENGTH,
-  TOOLTIP_POSITION_BELOW
+  TOOLTIP_POSITION_BELOW,
+  ACTOR_SEARCH_RESULT_PAGE_SIZE,
+  ACTOR_INDEX_NUMBER,
+  ACTOR_SEARCH_ORDER_BY
 } from '../constants';
 import {
   ActorSearchResult,
-  ActorProviderScorecardSearchResult
+  AzureSearchRequest
 } from '../report-cards-config.model';
 import { StepperSelectionEvent } from '@angular/cdk/stepper';
 
@@ -54,7 +57,7 @@ export class ReportCardsComponent implements OnDestroy {
 
   private unsubscribe$: Subject<void> = new Subject<void>();
 
-  constructor(public reportCardsService: ReportCardsService) {}
+  constructor(public reportCardsService: ReportCardsService) { }
 
   maxActors = MAX_ACTORS;
   minActors = MIN_ACTORS;
@@ -109,7 +112,14 @@ export class ReportCardsComponent implements OnDestroy {
 
   onSearchStringChange(searchString: string) {
     if (searchString && searchString.length >= MIN_SEARCH_STRING_LENGTH) {
-      this.reportCardsService.actorSearchString$.next(searchString);
+      this.reportCardsService.clearActorSearchResults();
+
+      const actorSearchRequest = new AzureSearchRequest(ACTOR_INDEX_NUMBER, searchString, ACTOR_SEARCH_RESULT_PAGE_SIZE);
+      actorSearchRequest.orderByFields = ACTOR_SEARCH_ORDER_BY;
+
+      this.reportCardsService.latestActorSearchRequest = actorSearchRequest;
+
+      this.reportCardsService.actorSearchRequest$.next(actorSearchRequest);
     }
   }
 

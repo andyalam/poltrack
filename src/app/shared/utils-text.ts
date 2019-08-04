@@ -26,9 +26,13 @@ export function isValidDateObject(d: Date): boolean {
 }
 
 /** returns true if d is a valid Date string
- * @param d - date object to test
+ * @param d - date string to test
  */
 export function isValidDateString(d: string): boolean {
+  if (!d) {
+    return false;
+  }
+
   const o = new Date(d);
   return isValidDateObject(o);
 }
