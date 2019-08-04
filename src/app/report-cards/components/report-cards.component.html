@@ -61,7 +61,7 @@
 								<mat-icon color="warn">
 										<fa-icon class="fa-xs" icon="exclamation-triangle"></fa-icon>
 									</mat-icon>
-								<i> Each politician must have at least one info provider or action configured</i>
+								<i> Each politician must have at least one info provider configured</i>
 							</span>
 						</div>
 					</div>
@@ -148,7 +148,8 @@
 					<mat-spinner [diameter]="spinnerDiameter"
 						*ngIf="reportCardsService.isActorSearchInProgress$ | async">
 					</mat-spinner>
-					<mat-icon color="accent" matTooltip="U.S. Congress since 1990 only" [matTooltipPosition]="toolTipPositionBelow">
+					<mat-icon color="accent" matTooltip="U.S. Congress since 1990 only"
+						[matTooltipPosition]="toolTipPositionBelow">
 						<fa-icon class="fa-xs" icon="question-circle"></fa-icon>
 					</mat-icon>
 				</div>
@@ -172,6 +173,18 @@
 							</p>
 						</mat-list-option>
 					</mat-selection-list>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<button mat-button *ngIf="reportCardsService.latestActorSearchRequest?.isNextPageAvailable"
+					(click)="reportCardsService.onLoadNextActorsPageClicked()"
+					mat-raised-button color="accent" aria-label="Get more politicians"
+					matTooltip="... of matching politician" [matTooltipPosition]="toolTipPositionBelow"
+					style="margin: 10px;">
+					Load Page {{reportCardsService.latestActorSearchRequest?.pagesToSkip + 1}} of 
+					{{reportCardsService.latestActorSearchRequest?.totalPagesAvailable}}
+					</button>
 				</div>
 			</div>
 		</div>
