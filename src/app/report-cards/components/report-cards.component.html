@@ -21,9 +21,10 @@
 					</div>
 					<div *ngFor="let actorConfig of reportCardsService.reportCardsConfigurationDataSource$ | async">
 						<div class="row actor-list-title">
-							<div class="col-md-10 mat-small"><strong>{{actorConfig.title}}</strong>
+							<div class="col-10 mat-small">
+								<strong class="title-text" [title]="actorConfig.title">{{actorConfig.title}}</strong>
 							</div>
-							<div class="col-md-2 mat-small">
+							<div class="col-2 mat-small">
 								<button mat-icon-button [value]="actorConfig.id"
 									(click)="onDeletePersonClicked($event)">
 									<mat-icon>
@@ -108,12 +109,15 @@
 											<mat-icon>
 												<fa-icon class="fa-xs" icon="eye"></fa-icon>
 											</mat-icon>&nbsp;
-											<strong>{{providerScorecardConfig.title}}</strong><br />
-											{{providerScorecardConfig.description}}
+											<span class="provider-title"><strong>{{providerScorecardConfig.title}}</strong></span>
 											<br />
-											{{ (providerScorecardConfig.scorecardStartDate) ? (providerScorecardConfig.scorecardStartDate | date) : '?' }}
-											-
-											{{ (providerScorecardConfig.scorecardEndDate) ? (providerScorecardConfig.scorecardEndDate | date) : '?' }}
+											<span class="provider-description">{{providerScorecardConfig.description}}</span>
+											<br />
+											<span class="provider-dates">
+												{{ (providerScorecardConfig.scorecardStartDate) ? (providerScorecardConfig.scorecardStartDate | date) : '?' }}
+												-
+												{{ (providerScorecardConfig.scorecardEndDate) ? (providerScorecardConfig.scorecardEndDate | date) : '?' }}
+											</span>
 										</div>
 											<div class="col-sm-1" style="padding: 0px">
 												<button mat-icon-button [value]="providerScorecardConfig.id"

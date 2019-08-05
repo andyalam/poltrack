@@ -43,7 +43,7 @@ import { StepperSelectionEvent } from '@angular/cdk/stepper';
 @Component({
   selector: 'report-cards',
   templateUrl: './report-cards.component.html',
-  styleUrls: ['./report-cards.component.css']
+  styleUrls: ['./report-cards.component.scss']
 })
 /** Top-level presentation component handles Actor and Provider selection and hosts
  * Report Card presentation component.
