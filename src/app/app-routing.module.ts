@@ -13,7 +13,8 @@ const routes: Routes = [
   },
   {
     path: 'tools',
-    loadChildren: 'app/examples/examples.module#ExamplesModule'
+    loadChildren: () =>
+      import('app/examples/examples.module').then(m => m.ExamplesModule)
   },
   { path: '', redirectTo: '/reportcard', pathMatch: 'full' },
   { path: '**', redirectTo: '/reportcard' }
