@@ -43,11 +43,22 @@
   min-height: 100px;
 }
 
+.delete-button-parent {
+  position: relative;
+  width: 100%;
+}
+.delete-button-container {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
 @media (max-width: 450px) {
-  .provider {
+  .actor {
     &-title,
     &-description,
     &-dates {
+      display: block;
       max-width: 100%;
       text-overflow: ellipsis;
       overflow: hidden;
@@ -57,5 +68,18 @@
 
   .actor-configuration-accordion .mat-expansion-panel-header {
     min-height: 120px;
+  }
+
+  .actor-configuration-accordion {
+    mat-panel-title {
+      max-width: 100%;
+    }
+    .actor-info {
+      max-width: 95%;
+    }
+  }
+
+  .delete-button-container {
+    right: -17px;
   }
 }

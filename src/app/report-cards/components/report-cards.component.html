@@ -83,11 +83,14 @@
 													<fa-icon class="fa-xs" icon="user"></fa-icon>
 												</mat-icon>
 											</div>
-											<div><strong>{{actorConfig.title}}</strong><br />
-												{{actorConfig.description}}<br />
-												{{ (actorConfig.termStarted) ? (actorConfig.termStarted | date) : '?' }}
-												-
-												{{ (actorConfig.termEnded) ? (actorConfig.termEnded | date) : '?' }}
+											<div class="actor-info">
+												<span class="actor-title"><strong>{{actorConfig.title}}</strong><br /></span>
+												<span class="actor-description">{{actorConfig.description}}<br /></span>
+												<span class="actor-dates">
+													{{ (actorConfig.termStarted) ? (actorConfig.termStarted | date) : '?' }}
+													-
+													{{ (actorConfig.termEnded) ? (actorConfig.termEnded | date) : '?' }}
+												</span>
 											</div>
 										</mat-panel-title>
 									</mat-expansion-panel-header>
@@ -105,7 +108,7 @@
 									</button>
 									<div class="row mat-small"
 										*ngFor="let providerScorecardConfig of actorConfig.scorecards">
-										<div class="col-sm-11" style="padding: 0px">
+										<div class="delete-button-parent" style="padding: 0px">
 											<mat-icon>
 												<fa-icon class="fa-xs" icon="eye"></fa-icon>
 											</mat-icon>&nbsp;
@@ -118,17 +121,18 @@
 												-
 												{{ (providerScorecardConfig.scorecardEndDate) ? (providerScorecardConfig.scorecardEndDate | date) : '?' }}
 											</span>
-										</div>
-											<div class="col-sm-1" style="padding: 0px">
+
+											<div class="delete-button-container" style="padding: 0px">
 												<button mat-icon-button [value]="providerScorecardConfig.id"
-												matTooltip="Delete provider" matTooltipPosition="below"
-												(click)="onDeleteProviderScorecardClicked($event)">
-												<mat-icon>
-													<fa-icon class="fa-xs" icon="times-circle"></fa-icon>
-												</mat-icon>
-											</button>
+													matTooltip="Delete provider" matTooltipPosition="below"
+													(click)="onDeleteProviderScorecardClicked($event)">
+													<mat-icon>
+														<fa-icon class="fa-xs" icon="times-circle"></fa-icon>
+													</mat-icon>
+												</button>
 											</div>
 										</div>
+									</div>
 								</mat-expansion-panel>
 							</mat-accordion>
 						</div>
